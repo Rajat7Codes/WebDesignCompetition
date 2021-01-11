@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $alert = "Problem occured while login reach developers for more information";
         // $log->userLog( 'Login Register', 'Email', 'Email Register', -1, 'Post vars are not set', 0, "");
     }
-    echo "<script>window.alert('$alert'); window.location='./index.php';</script>";
+    echo "<script>window.alert('$alert'); window.location='../index.php';</script>";
 }
 
 ?>

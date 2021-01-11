@@ -4,7 +4,7 @@ session_start();
     unset( $_SESSION['LOGIN_USER']);
     
     if(session_destroy()) {
-       header("Location: ../index.php");
+       header("Location: ../../index.php");
     }
              
 ?>

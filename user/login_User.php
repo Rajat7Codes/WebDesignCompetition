@@ -27,18 +27,18 @@
                     if( password_verify( $userPassword, $decryptedPass)){
                         $_SESSION['LOGIN_USER'] = base64_encode($userRow["id"]);
                         $alertMsg = "Login Successfull";
-                        $url_forward = "success.php";
+                        $url_forward = "../solve.php";
                         // $log->userLog( 'Login Register', 'Email', 'Email Login', -1, 'Login Successfull', 1, "");
                     }else{
                         $alertMsg = "Your login or password is invalid";
-                        $url_forward = "index.php";
+                        $url_forward = "../index.php";
                     }
                 }else if($user_request == 2){
                     $alertMsg = "Your Request Rejected";
-                    $url_forward = "index.php";
+                    $url_forward = "../index.php";
                 }else{
                     $alertMsg = "Your Request Not Accepted Yet";
-                    $url_forward = "index.php";
+                    $url_forward = "../index.php";
                 }
             } else {
                 $alertMsg = "You are not registered";
