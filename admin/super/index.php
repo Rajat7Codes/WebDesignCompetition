@@ -8,6 +8,7 @@
         $admin_query = "SELECT * FROM admin WHERE id=$login_admin";
         $admin_result = mysqli_query($db, $admin_query);
         $admin_row = mysqli_fetch_row($admin_result);
+        
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +32,7 @@
        
     </style>
 </head>
-
+<?php if($admin_row[4] == "ADMIN_SUPER"): ?>
 <body>
     <div class="d-flex" id="wrapper">
 
@@ -41,20 +42,37 @@
                 <img style="width:100px;" src="../assets/images/NGClogo.png" alt="">
                 <span>NextGenCoder</span>
             </div>
-            <div class="list-group list-group-flush">
-                <a href="./" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+            <div class="list-group list-group-flush font-italic">
+                <a href="./" class="list-group-item list-group-item-action bg-light"><i class="fas fa-chalkboard-teacher"></i>&nbsp;Dashboard</a>
                 <a class="nav-link collapsed list-group-item list-group-item-action bg-light" href="#submenu1sub1"
-                    data-toggle="collapse" data-target="#submenu1sub1">Users <span
+                    data-toggle="collapse" data-target="#submenu1sub1"><i class="fas fa-users"></i>&nbsp;Users <span
                         class="float-right dropdown-toggle"></span></a>
                 <div class="collapse small" id="submenu1sub1" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li class="nav-item">
                             <a class="nav-link list-group-item list-group-item-action bg-light text-center"
-                                style="border: none;" href="./all_users.php"> View Users</a>
+                                style="border: none;" href="./all_users.php"><i class="fas fa-eye"></i>&nbsp; View Users</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link list-group-item list-group-item-action bg-light text-center"
-                                style="border: none;" href="./requested_users.php">Request List</a>
+                                style="border: none;" href="./requested_users.php"><i class="fas fa-user-clock"></i>&nbsp;Request List</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <a class="nav-link collapsed list-group-item list-group-item-action bg-light" href="#submenu1sub2"
+                    data-toggle="collapse" data-target="#submenu1sub2"><i class="fas fa-tasks"></i>&nbsp;Moderator <span
+                        class="float-right dropdown-toggle"></span></a>
+                <div class="collapse small" id="submenu1sub2" aria-expanded="false">
+                    <ul class="flex-column nav">
+                        <li class="nav-item">
+                            <a class="nav-link list-group-item list-group-item-action bg-light text-center"
+                                style="border: none;" href="./moderator_add.php"><i class="fas fa-user-plus"></i>&nbsp;Add Moderator</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link list-group-item list-group-item-action bg-light text-center"
+                                style="border: none;" href="./moderator.php"><i class="fas fa-users-cog"></i>&nbsp;&nbsp;&nbsp;&nbsp;Moderators</a>
                         </li>
 
                     </ul>
@@ -72,7 +90,7 @@
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                 <button class="btn btn-light" id="menu-toggle">
-                    <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+                    <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
                 </button>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -87,7 +105,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link font-italic" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ml-2 fa fa-user-circle fa-2x" aria-hidden="true"></i>
+                                <i class="ml-2 fa fa-user-circle fa-lg" aria-hidden="true"></i>
 
                             </a>
                             <div class="dropdown-menu dropdown-menu-right"style="width:250px;" aria-labelledby="navbarDropdown">
@@ -112,19 +130,19 @@
                             $user_decline = mysqli_num_rows($user_de);
                     ?>
                     <div class="col-sm-3 cod m-4 bg-success border border-success">
-                        <div class="fa fa-users fa-5x "></div>
+                        <div class="fa fa-user-check fa-5x "></div>
                          <br>
                             <span>ACCEPTED <br><?php echo $user_all; ?></span>
                     </div>
-                    <div class="col-sm-3 cod m-4 bg-info border-info">
-                        <div class="fa fa-envelope fa-5x">
+                    <div class="col-sm-3 cod m-4 bg-warning border-warning">
+                        <div class="fa fa-user-clock fa-5x">
                             
                         </div>
                          <br>
                             <span>PENDING <br><?php echo $user_co; ?></span>
                     </div>
                     <div class="col-sm-3 cod m-4 bg-danger border-danger">
-                        <div class="fa fa-ban fa-5x">
+                        <div class="fa fa-user-alt-slash fa-5x">
                             
                         </div><br>
                         <span>DECLINE<br><?php echo $user_decline; ?></span>
@@ -193,7 +211,7 @@
         });
     </script>
 </body>
-
+<?php endif; ?>
 </html>
 <?php 
 }else{

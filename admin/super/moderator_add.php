@@ -8,6 +8,7 @@
         $admin_query = "SELECT * FROM admin WHERE id=$login_admin";
         $admin_result = mysqli_query($db, $admin_query);
         $admin_row = mysqli_fetch_row($admin_result);
+        
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,21 +21,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="https:////cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
-
     <link rel="stylesheet" href="../assets/sidebar.css">
-    <title>REQUESTED USERS</title>
-    <style>
-        .users_row input {
-           
-        }
-    </style>
+    <title>Moderator</title>
 </head>
 <?php if($admin_row[4] == "ADMIN_SUPER"): ?>
+
 <body>
+
+
+
     <div class="d-flex" id="wrapper">
 
         <!-- Sidebar -->
-        <div class="bg-light border-right border-info" id="sidebar-wrapper">
+        <div class="bg-light border-right" id="sidebar-wrapper">
         <div class="sidebar-heading pb-5 font-italic text-center">
                 <img style="width:100px;" src="../assets/images/NGClogo.png" alt="">
                 <span>NextGenCoder</span>
@@ -75,16 +74,13 @@
                     </ul>
                 </div>
                
-               
-
-
 
 
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
 
-        <div id="page-content-wrapper" style="width:100%">
+        <div id="page-content-wrapper">
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                 <button class="btn btn-light" id="menu-toggle">
@@ -117,63 +113,74 @@
                 </div>
             </nav>
 
+            <div class="container-fluid">
+                <div class="tab-pane mt-2" id="signup">
+                    <div class="row justify-content-center">
+                        <div class="col-6">
+                        <div class="card">
+
+                            <div class="card-header bg-dark text-light">
+                                <h3 class="font-italic mt-2 text-center card-title">ADD MODERATOR</h3>
+
+                            </div>
 
 
-            <div class="container">
-                <div class="mt-3">
-                    <table class="table row-border table-light" id="users_row">
-                        <thead class="thead-dark font-italic">
-                            <tr>
-                                <th>id</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                           
-                        <tbody>
-                            <?php
-                                $user_info = "SELECT * FROM users WHERE request=0";
-                                $user_result = mysqli_query($db, $user_info);
-                                while($user_row = mysqli_fetch_assoc($user_result)){
-                            ?>
-                            <tr>
-                                <td><?php echo $user_row['id']; ?></td>
-                                <td><?php echo $user_row['name']; ?></td>
-                                <td><?php echo $user_row['mail']; ?></td>
-                                <td>
-                                    <a class="btn btn-sm btn-info" href="../model/accept.php?id=<?php echo $user_row['id']; ?>">Accept</a>
-                                    <a class="btn btn-sm btn-danger" href="../model/reject.php?id=<?php echo $user_row['id']; ?>">Reject</a> 
- 
-                                </td>
-                            </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
+                            <div class="card-body">
+                                <form action="../model/add_moderator.php" method="post">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input id="name" class="form-control" type="text" name="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">E-mail :</label>
+                                        <input id="email" class="form-control" type="text" name="mail">
+                                    </div>
 
+                                    <div class="form-group">
+                                        <label for="password">Password :</label>
+                                        <input id="password" class="form-control" type="password" name="pass">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button class="btn btn-lg btn-info" type="submit">ADD</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+
     </div>
-    </div>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
-            <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
     <script>
         $("#menu-toggle").click(function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
-            
         });
         $(document).ready(function () {
             $('#users_row').DataTable();
-            
-            
+            dom: 'frtip'
         });
     </script>
 </body>
 <?php endif; ?>
+
 </html>
-<?php }else{
-    
-} ?>
+<?php 
+}else{
+        
+}
+?>
