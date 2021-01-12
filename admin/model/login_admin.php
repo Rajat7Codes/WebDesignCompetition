@@ -27,7 +27,7 @@
                 if( password_verify( $userPassword, $decryptedPass)){
                     $_SESSION['LOGIN_ADMIN'] = base64_encode($userRow["id"]);
                     $alertMsg = "Login Successfull";
-                    $url_forward = "../super/index.php";
+                    $url_forward = "../moderator/index.php";
                     // $log->userLog( 'Login Register', 'Email', 'Email Login', -1, 'Login Successfull', 1, "");
                 }else{
                     $alertMsg = "Your login or password is invalid";
