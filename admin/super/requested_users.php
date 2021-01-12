@@ -127,13 +127,14 @@
                                 <th>id</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                            
                         <tbody>
                             <?php
-                                $user_info = "SELECT * FROM users WHERE request=0";
+                                $user_info = "SELECT * FROM users";
                                 $user_result = mysqli_query($db, $user_info);
                                 while($user_row = mysqli_fetch_assoc($user_result)){
                             ?>
@@ -142,9 +143,30 @@
                                 <td><?php echo $user_row['name']; ?></td>
                                 <td><?php echo $user_row['mail']; ?></td>
                                 <td>
-                                    <a class="btn btn-sm btn-info" href="../model/accept.php?id=<?php echo $user_row['id']; ?>">Accept</a>
-                                    <a class="btn btn-sm btn-danger" href="../model/reject.php?id=<?php echo $user_row['id']; ?>">Reject</a> 
- 
+                                    <?php if($user_row['request'] == 0): ?>
+                                        <span class="badge badge-pill badge-warning">pending</span>
+                                    <?php elseif($user_row['request'] == 1): ?>
+                                        <span class="badge badge-pill badge-success">accepted</span>
+                                    <?php elseif($user_row['request'] == 2): ?>
+                                        <span class="badge badge-pill badge-danger">rejected</span>
+                                    <?php endif; ?>
+
+                                </td>
+                                <td>
+                                    <?php if($user_row['request'] == 0):  ?>
+                                        <a class="btn btn-sm btn-info" href="../model/accept.php?id=<?php echo $user_row['id']; ?>">Accept</a>
+                                        <a class="btn btn-sm btn-danger" href="../model/reject.php?id=<?php echo $user_row['id']; ?>">Reject</a> 
+
+                                    <?php endif; ?>
+
+                                    <?php if($user_row['request'] == 1):  ?>
+                                        <a class="btn btn-sm btn-secondary" href="../model/accept.php?id=<?php echo $user_row['id']; ?>">Revert</a>
+                                    <?php endif; ?>
+
+                                    <?php if($user_row['request'] == 2):  ?>
+                                        <a class="btn btn-sm btn-secondary" href="../model/accept.php?id=<?php echo $user_row['id']; ?>">Revert</a>
+                                    <?php endif; ?>
+                                     
                                 </td>
                             </tr>
                             <?php } ?>
