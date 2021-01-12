@@ -25,7 +25,7 @@
     <title>Admin</title>
     <style>
         .cod {
-            height: 150px;
+            height: 180px;
             border-radius: 10px;
 
         }
@@ -51,7 +51,7 @@
                     <ul class="flex-column nav">
                         <li class="nav-item">
                             <a class="nav-link list-group-item list-group-item-action bg-light text-center"
-                                style="border: none;" href="./all_users.php"><i class="fas fa-eye"></i>&nbsp; View Users</a>
+                                style="border: none;" href="./"><i class="fas fa-eye"></i>&nbsp; View Users</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link list-group-item list-group-item-action bg-light text-center"
@@ -129,19 +129,19 @@
                             $user_de = mysqli_query($db ,"SELECT * FROM users WHERE request=2");
                             $user_decline = mysqli_num_rows($user_de);
                     ?>
-                    <div class="col-sm-3 cod m-4 bg-success border border-success">
+                    <div class="col-sm-3 cod p-4 mx-4 bg-success border border-success">
                         <div class="fa fa-user-check fa-5x "></div>
                          <br>
                             <span>ACCEPTED <br><?php echo $user_all; ?></span>
                     </div>
-                    <div class="col-sm-3 cod m-4 bg-warning border-warning">
+                    <div class="col-sm-3 cod p-4 mx-4 bg-warning border-warning">
                         <div class="fa fa-user-clock fa-5x">
                             
                         </div>
                          <br>
                             <span>PENDING <br><?php echo $user_co; ?></span>
                     </div>
-                    <div class="col-sm-3 cod m-4 bg-danger border-danger">
+                    <div class="col-sm-3 cod p-4 mx-4 bg-danger border-danger">
                         <div class="fa fa-user-alt-slash fa-5x">
                             
                         </div><br>

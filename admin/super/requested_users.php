@@ -48,7 +48,7 @@
                     <ul class="flex-column nav">
                         <li class="nav-item">
                             <a class="nav-link list-group-item list-group-item-action bg-light text-center"
-                                style="border: none;" href="./all_users.php"><i class="fas fa-eye"></i>&nbsp; View Users</a>
+                                style="border: none;" href="./"><i class="fas fa-eye"></i>&nbsp; View Users</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link list-group-item list-group-item-action bg-light text-center"

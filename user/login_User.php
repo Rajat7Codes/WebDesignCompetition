@@ -42,6 +42,7 @@
                 }
             } else {
                 $alertMsg = "You are not registered";
+                $url_forward = "../index.php";
                 // $log->userLog( 'Login Register', 'Email', 'Email Login', -1, 'User not registered', 0, "User not found");
             }
             

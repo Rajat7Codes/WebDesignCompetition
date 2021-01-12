@@ -19,9 +19,9 @@ js.setValue(`function giveAlert() {
     alert('Alert Msg is Called');
 }`);
 
-function compile() {
-    var output = document.getElementById("output").contentWindow.document;
+var output = document.getElementById("output").contentWindow.document;
 
+function compile() {
     var outputCode = "";
     document.body.onkeyup = function() {
         output.open();
@@ -32,5 +32,3 @@ function compile() {
         output.close();
     };
 }
-
-compile();

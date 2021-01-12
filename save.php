@@ -1,6 +1,8 @@
 <?php 
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
+    include('user/model/connect-db.php');
+    session_start();
 
     if( isset( $_SESSION["LOGIN_USER"])) {
 
@@ -18,7 +20,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             /******************** CODE SAVE *********************/
 
             // Checking if code exists
-            $codeQuery = "SELECT id FROM codes WHERE user_id=$userId"; 
+            $codeQuery = "SELECT id FROM codes WHERE user_id=$userId";
             $codeRow = mysqli_fetch_assoc( mysqli_query($db,$codeQuery));
 
             // Creating Query for Saving codes
@@ -31,10 +33,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->bind_param("ssss", $userId, $htmlCode, $cssCode, $jsCode);
             }
 
-            
+            if ($stmt->execute()) {
+                $ajaxResponse["alertToGive"] = 'Code Saved Successfull';
+                $ajaxResponse["isError"] = false;    
+            } else {
+                $ajaxResponse["alertToGive"] = 'Error while saving and running code...';
+            }
 
         }
-    }
+        echo json_encode($ajaxResponse);
+    } 
 }
 
 ?>

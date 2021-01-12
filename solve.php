@@ -1,5 +1,6 @@
 <?php 
 session_start();
+include('user/model/connect-db.php');
 if(isset($_SESSION["LOGIN_USER"])) {
 ?>
 
@@ -46,6 +47,29 @@ if(isset($_SESSION["LOGIN_USER"])) {
     <script src="assets/src-noconflict/ace.js"></script>
     <script type="text/javascript" src="app.js"></script>
 
+
+<?php 
+        $userId = base64_decode( $_SESSION['LOGIN_USER']);
+
+        $codeQuery = "SELECT * FROM codes WHERE user_id=$userId"; 
+        $codeRow = mysqli_fetch_assoc( mysqli_query($db,$codeQuery));
+
+
+        if($codeRow) { ?>
+        <script>
+
+            var htmlInput = `<?php echo $codeRow["html"] ?>`;
+            var cssInput = `<?php echo $codeRow["css"] ?>`;
+            var jsInput = `<?php echo $codeRow["js"] ?>`;
+        
+            html.setValue( htmlInput);
+            css.setValue( cssInput);
+            js.setValue( jsInput);
+
+        </script>
+<?php   }  
+?>
+
     <script>
         function saveCode() {
             var htmlCode = html.session.getValue();
@@ -77,7 +101,7 @@ if(isset($_SESSION["LOGIN_USER"])) {
                             document.getElementById("output-div").innerText = runResponse["output"];
                         }
                     } catch(e) {
-                        alert("Problem occured"); 
+                        alert( "Code saved successfull");
                     } finally {
                         document.getElementById("saveSpinner").style.display = "none";
                         document.getElementById("saveText").innerText = "Save";
