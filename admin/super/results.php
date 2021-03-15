@@ -122,37 +122,7 @@
                 </div>
             </nav>
 
-            <div class="container p-3">
-                <div class="row justify-content-center text-light text-center font-italic">
-                    <?php 
-                            $user_reg = mysqli_query($db ,"SELECT * FROM users WHERE request=1");
-                            $user_all = mysqli_num_rows($user_reg);
-                            $user_re = mysqli_query($db ,"SELECT * FROM users WHERE request=0");
-                            $user_co = mysqli_num_rows($user_re);
-                            $user_de = mysqli_query($db ,"SELECT * FROM users WHERE request=2");
-                            $user_decline = mysqli_num_rows($user_de);
-                    ?>
-                    <div class="col-sm-3 cod p-4 mx-4 bg-success border border-success">
-                        <div class="fa fa-user-check fa-5x "></div>
-                         <br>
-                            <span>ACCEPTED <br><?php echo $user_all; ?></span>
-                    </div>
-                    <div class="col-sm-3 cod p-4 mx-4 bg-warning border-warning">
-                        <div class="fa fa-user-clock fa-5x">
-                            
-                        </div>
-                         <br>
-                            <span>PENDING <br><?php echo $user_co; ?></span>
-                    </div>
-                    <div class="col-sm-3 cod p-4 mx-4 bg-danger border-danger">
-                        <div class="fa fa-user-alt-slash fa-5x">
-                            
-                        </div><br>
-                        <span>DECLINE<br><?php echo $user_decline; ?></span>
-                    </div>
-
-                </div>
-            </div>
+          
             <div class="container">
                 <div class="table-responsive">
                     <table class="table row-border table-light" id="users_row">
@@ -161,29 +131,25 @@
                                 <th>id</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Status</th>
+                                <th>total</th>
                             </tr>
                         </thead>
                            
                         <tbody>
                             <?php
-                                $user_info = "SELECT * FROM users";
+                                $user_info = "SELECT evaluations.*, users.* FROM evaluations INNER JOIN users ON 
+                                    evaluations.user_id = users.id ";
                                 $user_result = mysqli_query($db, $user_info);
-                                while($user_row = mysqli_fetch_assoc($user_result)){
+                                $user_row = mysqli_fetch_assoc($user_result);
+                                if($user_row){
+                                    
                             ?>
                             <tr>
                                 <td><?php echo $user_row['id']; ?></td>
                                 <td><?php echo $user_row['name']; ?></td>
                                 <td><?php echo $user_row['mail']; ?></td>
                                 <td>
-                                    <?php if($user_row['request'] == 0): ?>
-                                        <span class="badge badge-pill badge-warning">pending</span>
-                                    <?php elseif($user_row['request'] == 1): ?>
-                                        <span class="badge badge-pill badge-success">accepted</span>
-                                    <?php elseif($user_row['request'] == 2): ?>
-                                        <span class="badge badge-pill badge-danger">rejected</span>
-                                    <?php endif; ?>
-
+                                    <?php echo $user_row['points']; ?>
                     
                                 
                                 </td>
@@ -214,14 +180,10 @@
         });
     </script>
 </body>
-<?php else: ?>
-    <?php echo "<script> window.location = '../model/logout_admin.php' </script>"; ?>
 <?php endif; ?>
-
 </html>
 <?php 
 }else{
-    echo "<script> window.location = '../model/logout_admin.php' </script>";
-    
+        
 }
 ?>

@@ -11,9 +11,11 @@
 
         if(isset($_REQUEST['did'])){
             $did = $_REQUEST['did'];
-            $del_moderator = "DELETE FROM admin WHERE id=$did";
+            $del_moderator = "DELETE FROM moderators WHERE id=$did";
             if(mysqli_query($db,$del_moderator)){
                 $msg = 'Moderator Deleted';
+                myaqli_query($db, "ALTER TABLE codes
+                DROP COLUMN moderator_$did;");
             }else{
                 $msg = 'Error Occured';
 
@@ -93,6 +95,8 @@
 
                     </ul>
                 </div>
+                <a href="./results.php" class="list-group-item list-group-item-action bg-light"><i class="fas fa-code"></i>&nbsp;Results</a>
+
                
 
             </div>
@@ -139,7 +143,7 @@
                     <div class="row justify-content-center">
                         <?php
                             
-                            $moderator_query = "SELECT * FROM admin WHERE id=$id";
+                            $moderator_query = "SELECT * FROM moderators WHERE id=$id";
                             $moderator_result = mysqli_query($db, $moderator_query);
                             $moderator_row = mysqli_fetch_row($moderator_result);
 
@@ -200,7 +204,7 @@
                            
                         <tbody>
                             <?php
-                                $admin_info = "SELECT * FROM admin WHERE admin_role='ADMIN_MODERATOR'";
+                                $admin_info = "SELECT * FROM moderators";
                                 $admin_result = mysqli_query($db, $admin_info);
                                 while($admin_row1 = mysqli_fetch_assoc($admin_result)){
                             ?>

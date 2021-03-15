@@ -1,0 +1,110 @@
+body {
+    text-align: center;
+}
+
+.editors {
+    width: 100%;
+    height: 40vh;
+}
+
+.ace_print-margin {
+    left: 0 !important;
+}
+
+.editor-title {
+    height: 3.40vh;
+    background-color: #f0f0f0;
+}
+
+.editor-title p{
+    text-align: start;
+    color: black;
+}
+
+#html-title {
+    width: 70px;
+    background-color: orange;
+    padding: 2px;
+    text-align: center;
+}
+
+#css-title {
+    padding: 5px;
+    background-color:#27A444;
+    text-align: center;
+    cursor: pointer;
+}
+
+#js-title {
+    padding: 5px 10px;
+    background-color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
+#html {
+    width: 100%;
+}
+
+#output {
+    width: 100%;
+    height: 85vh;
+    border: 1px solid rgb(233, 233, 233);
+}
+
+
+.js-div {
+    display: none;
+}
+
+.fullscreen, .fullscreen1{
+    width: 30px;
+    position: relative;
+    top: 8px;
+    left: 5px;
+    cursor: pointer;
+}
+
+.fullscreen1{
+    display: none;
+}
+
+#add-col a{
+    display: inline;
+    position: absolute;
+    border-radius: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+.fullscreen1:hover ~ .custom-tooltip1{
+    display: block;
+}
+.fullscreen:hover ~ .custom-tooltip{
+    display: block;
+}
+.custom-tooltip,.custom-tooltip1{
+    display: none;
+    position: absolute;
+    top: 30px;
+    left: 34px;
+    color: white;
+    background: rgb(29, 27, 27);
+    font-size: 10px;
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+.run{
+    top: 10px;
+    right: 130px;
+    padding: 5px 30px;
+}
+
+.submit{
+    top: 10px;
+    right: 10px;
+    padding: 5px 20px;
+}
+
+#output{
+    border: 0;
+}
